@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>NeoPixel Controller</title>
+<style>
+  /* スライダーを太くして操作しやすくするスタイル */
+  input[type="range"] {
+    width: 80%; /* スライダーの幅を画面幅の90%に設定 */
+    height: 20px; /* スライダーの高さを太くする */
+    margin: 0 auto 80px 40px; /* 左側に40pxの余白を追加 */
+    appearance: none; /* 標準プロパティを追加 */
+    -webkit-appearance: none; /* デフォルトのスタイルを無効化 */
+    background: #ddd; /* スライダーの背景色 */
+    border-radius: 10px; /* スライダーの角を丸くする */
+    outline: none; /* フォーカス時の枠線を非表示 */
+  }
+
+  /* スライダーのつまみ部分のスタイル */
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* デフォルトのスタイルを無効化 */
+    width: 30px; /* つまみの幅 */
+    height: 30px; /* つまみの高さ */
+    background: #666; /* つまみの色 */
+    border-radius: 50%; /* つまみを丸くする */
+    cursor: pointer; /* カーソルをポインタに変更 */
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    width: 30px;
+    height: 30px;
+    background: #666;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<h1>RGB Controller (リアルタイム版)</h1>
+R: <input type="range" id="r" min="0" max="255" value="0"><br>
+G: <input type="range" id="g" min="0" max="255" value="0"><br>
+B: <input type="range" id="b" min="0" max="255" value="0"><br>
+
+<script>
+function sendColor() {
+    let r = document.getElementById('r').value;
+    let g = document.getElementById('g').value;
+    let b = document.getElementById('b').value;
+    fetch(`/?r=${r}&g=${g}&b=${b}`);
+}
+
+document.getElementById('r').addEventListener('input', sendColor);
+document.getElementById('g').addEventListener('input', sendColor);
+document.getElementById('b').addEventListener('input', sendColor);
+</script>
+
+</body>
+</html>
